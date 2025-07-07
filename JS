@@ -1,0 +1,4 @@
+// 错误时显示
+translationGrid.style.display = 'grid';
+// 正确时隐藏
+translationGrid.style.display = 'none';
