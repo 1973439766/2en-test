@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>社科词汇练习</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 15px;
+      background-color: #f9f9f9;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .question {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .stem {
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .choices button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #eee;
+      font-size: 13px;
+    }
+    .choices button:hover {
+      background-color: #ddd;
+    }
+    .feedback {
+      padding: 10px;
+      background-color: #e6f7ff;
+      border-left: 3px solid #1890ff;
+      display: none;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .translation-grid {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .word-card {
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      font-size: 13px;
+    }
+    .correct {
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .incorrect {
+      color: #e74c3c;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .word-card strong {
+      color: #007acc;
+      display: block;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+    .dict-def, .word-root, .similar-words {
+      margin-bottom: 3px;
+    }
+    .dict-def em {
+      font-style: normal;
+      color: #555;
+    }
+    .difficult-words {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #fff5f5;
+      border-left: 3px solid #ffcccc;
+      border-radius: 4px;
+    }
+    .difficult-words h4 {
+      margin: 0 0 8px 0;
+      color: #d33;
+      font-size: 14px;
+    }
+    .difficult-word {
+      margin-bottom: 10px;
+      padding: 8px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid #ffe6e6;
+      font-size: 13px;
+    }
+    .difficult-word strong {
+      color: #c00;
+      display: block;
+      margin-bottom: 3px;
+    }
+    @media (min-width: 500px) {
+      .translation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size:16px;margin-bottom:15px;text-align:center;">📘 社科词汇练习</h1>
+
+  <div class="question" id="q1">
+    <div class="stem">
+      Many people suffer from ______ health issues after living through a war.
+    </div>
+    <div class="choices">
+      <button onclick="checkAnswer('mental', true)">mental</button>
+      <button onclick="checkAnswer('milk', false)">milk</button>
+      <button onclick="checkAnswer('mess', false)">mess</button>
+      <button onclick="checkAnswer('mile', false)">mile</button>
+    </div>
+    
+    <div id="fb_q1" class="feedback"></div>
+    
+    <div id="trans_q1" class="translation-grid">
+      <div class="word-card">
+        <strong>mental 🔈（心理的）</strong>
+        <div class="dict-def">📖 <em>Collins:</em> Mental means relating to the process of thinking.</div>
+        <div class="word-root">▪ 构词分析：ment（思考）+ -al（形容词后缀）</div>
+        <div class="similar-words">▪ 形近词：mentalism, mentality, mention</div>
+      </div>
+      <div class="word-card">
+        <strong>milk 🔈（牛奶）</strong>
+        <div class="dict-def">📖 <em>Collins:</em> A white liquid produced by female mammals to feed their young.</div>
+        <div class="word-root">▪ 构词分析：古英语 meoluc</div>
+        <div class="similar-words">▪ 形近词：milky, milkshake, millet</div>
+      </div>
+      <div class="word-card">
+        <strong>mess 🔈（混乱）</strong>
+        <div class="dict-def">📖 <em>Collins:</em> A dirty or untidy state.</div>
+        <div class="word-root">▪ 构词分析：古法语 mes (餐)</div>
+        <div class="similar-words">▪ 形近词：message, messy, massage</div>
+      </div>
+      <div class="word-card">
+        <strong>mile 🔈（英里）</strong>
+        <div class="dict-def">📖 <em>Collins:</em> A unit of distance equal to 1,760 yards.</div>
+        <div class="word-root">▪ 构词分析：拉丁语 milia (千步)</div>
+        <div class="similar-words">▪ 形近词：mileage, milestone, military</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(selectedWord, isCorrect) {
+      const feedbackBox = document.getElementById('fb_q1');
+      const translationGrid = document.getElementById('trans_q1');
+      
+      if (isCorrect) {
+        feedbackBox.innerHTML = `
+          <div class="correct">✅ 正确！</div>
+          <div class="difficult-words">
+            <h4>📝 例句中可能不认识的单词：</h4>
+            <div class="difficult-word">
+              <strong>suffer 🔈（遭受）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> To experience something unpleasant.</div>
+              <div class="word-root">▪ 构词分析：拉丁语 suffrere（承受下方）</div>
+              <div class="similar-words">▪ 形近词：suffering, sufferer, buffer</div>
+            </div>
+            <div class="difficult-word">
+              <strong>issues 🔈（问题）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> Problems or difficulties.</div>
+              <div class="word-root">▪ 构词分析：古法语 issu（流出）</div>
+              <div class="similar-words">▪ 形近词：issue, tissue, missive</div>
+            </div>
+            <div class="difficult-word">
+              <strong>through 🔈（经历）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> From the beginning to the end of an experience.</div>
+              <div class="word-root">▪ 构词分析：古英语 þurh（穿透）</div>
+              <div class="similar-words">▪ 形近词：thorough, throughout, throw</div>
+            </div>
+          </div>
+        `;
+      } else {
+        feedbackBox.innerHTML = `
+          <div class="incorrect">❌ 错误，正确答案是 <strong>mental</strong></div>
+          <div style="margin-bottom:8px;">您选择了: <strong>${selectedWord}</strong></div>
+          <div class="difficult-words">
+            <h4>📝 例句中可能不认识的单词：</h4>
+            <div class="difficult-word">
+              <strong>suffer 🔈（遭受）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> To experience something unpleasant.</div>
+              <div class="word-root">▪ 构词分析：拉丁语 suffrere（承受下方）</div>
+              <div class="similar-words">▪ 形近词：suffering, sufferer, buffer</div>
+            </div>
+            <div class="difficult-word">
+              <strong>issues 🔈（问题）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> Problems or difficulties.</div>
+              <div class="word-root">▪ 构词分析：古法语 issu（流出）</div>
+              <div class="similar-words">▪ 形近词：issue, tissue, missive</div>
+            </div>
+            <div class="difficult-word">
+              <strong>through 🔈（经历）</strong>
+              <div class="dict-def">📖 <em>Collins:</em> From the beginning to the end of an experience.</div>
+              <div class="word-root">▪ 构词分析：古英语 þurh（穿透）</div>
+              <div class="similar-words">▪ 形近词：thorough, throughout, throw</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      feedbackBox.style.display = 'block';
+      translationGrid.style.display = 'grid';
+    }
+  </script>
+</body>
+</html>
